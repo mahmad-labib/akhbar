@@ -1,3 +1,7 @@
+// require('./demo/chart-area-demo')
+// require('./demo/chart-bar-demo')
+// require('./demo/chart-pie-demo')
+// require('./demo/datatables-demo')
 (function($) {
   "use strict"; // Start of use strict
 
@@ -54,3 +58,4 @@
   });
 
 })(jQuery); // End of use strict
+

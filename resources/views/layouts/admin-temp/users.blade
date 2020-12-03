@@ -1,0 +1,42 @@
+@extends('layouts.app')
+
+@section('content')
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <table id="" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            @foreach ($users as $user)
+                <tbody>
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                    </tr>
+                </tbody>
+            @endforeach
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </tfoot>
+        </table>
+        <script>
+            $(document).ready(function() {
+                $('#myTable').DataTable();
+            });
+
+        </script>
+    </div>
+    <!-- End of Main Content -->
+
+@endsection

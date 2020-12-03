@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\user_roles;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts/admin-temp/home');
+        $users = User::all();
+        
+        return view('layouts/admin-temp/home')->with('users', $users);
     }
 }

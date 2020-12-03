@@ -18078,6 +18078,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// require('./demo/chart-area-demo')
+// require('./demo/chart-bar-demo')
+// require('./demo/chart-pie-demo')
+// require('./demo/datatables-demo')
 (function ($) {
   "use strict"; // Start of use strict
   // Toggle the side navigation
