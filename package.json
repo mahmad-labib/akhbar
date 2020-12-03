@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@coreui/coreui": "^3.4.0",
         "slick-carousel": "^1.8.1"
     }
 }
