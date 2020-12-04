@@ -7,10 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\user_roles;
+use App\Permissions\HasPermissionsTrait;
+
+
 
 class User extends Authenticatable
 {
+    use HasPermissionsTrait; //Import The Trait
+
     use HasFactory, Notifiable;
+    
 
     /**
      * The attributes that are mass assignable.

@@ -24,6 +24,7 @@ Route::get('/news-page', function() {
     return view('layouts/site/pages/news');
 })->name('news');
 
+Route::get('/roles', 'PermissionController@Permission');
 
 Auth::routes();
 Route::get('/admin', [HomeController::class, 'index'])->name('admin');
