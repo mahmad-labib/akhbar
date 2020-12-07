@@ -16,16 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $news = ["مكافحه الارهاب","مكافحه الارهاب","مكافحه الارهاب"];
+    $news = ["مكافحه الارهاب", "مكافحه الارهاب", "مكافحه الارهاب"];
     return view('layouts/site/pages/home',  ['news' => $news]);
 });
 
-Route::get('/news-page', function() {
+Route::get('/news-page', function () {
     return view('layouts/site/pages/news');
 })->name('news');
 
-Route::get('/roles', 'PermissionController@Permission');
-
 Auth::routes();
-Route::get('/admin', [HomeController::class, 'index'])->name('admin');
 
+Route::group(['middleware' => 'role:admin'], function () {
+    
+    Route::get(
+        '/admin',
+        [HomeController::class, 'index']
+    )->name('admin');
+});
