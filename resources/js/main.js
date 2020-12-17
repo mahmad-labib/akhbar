@@ -41,5 +41,8 @@ $('.autoplay').slick({
   
 });
 
+$(document).ready(function() {
+    $('#dataTable').DataTable();
+  })
 
 

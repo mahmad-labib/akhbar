@@ -32,7 +32,6 @@ class RolesController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -72,7 +71,7 @@ class RolesController extends Controller
     {
         $permissions = Permission::all();
         $role = Role::where('id', $id)->first();
-        
+        return view('layouts/admin-temp/pages/role_permission')->with('role', $role)->with('permissions', $permissions);
     }
 
     /**
@@ -84,7 +83,16 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'permissions' => 'required'
+        ]);
+        $name = $request->name;
+        $perm = $request->permissions;
+        $role = Role::where('id', $id)->first();
+        $role->update(['name' => $name, 'slug' => $name]);
+        $role->permissions()->sync($perm);
+        return redirect('/roles');
     }
 
     /**

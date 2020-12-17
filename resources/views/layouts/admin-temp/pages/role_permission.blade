@@ -3,33 +3,30 @@
 @section('content')
     <div class="card shadow ">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Edit User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Role</h6>
         </div>
         <div class="card-body">
-            <form>
-                @foreach ($user as $user)
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" value="{{ $user->name }}">
-                        </div>
+            <form method="POST" action={{ '/roles' . '/' . $role->id }}>
+                @csrf
+                @method('PUT')
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ $role->name }}">
                     </div>
-                    <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email address</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="email" value="{{ $user->email }}">
-                        </div>
-                    </div>
-                @endforeach
+                </div>
+
                 <div class="form-group">
-                    <label for="cars">Choose a Role:</label>
-                    <div class="form-group col-md-4">
-                        <label for="inputState">Roles</label>
-                        <select id="inputState" class="form-control">
-                            @foreach ($all_roles as $role)
-                                <option>{{ $role->name }}</option>
-                            @endforeach
-                        </select>
+                    <label for="cars">Choose permissions:</label>
+                    <div class="form-group col-md-12">
+                        @foreach ($permissions as $perm)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input btn btn-success btn-circle" type="checkbox"
+                                    value={{ $perm->id }} id="{{ $perm->id }}" name='permissions[]'>
+                                <label class="form-check-label btn btn-primary"
+                                    for="{{ $perm->id }}">{{ $perm->name }}</label>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 

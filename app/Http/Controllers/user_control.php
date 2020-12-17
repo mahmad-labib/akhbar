@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
+
 class user_control extends Controller
 {
     /**
@@ -75,7 +77,7 @@ class user_control extends Controller
         $user = User::where('id', $id)->first();
         $user_roles = $user->roles;
         $user->user_roles = array($user_roles);
-        
+
         return view('layouts/admin-temp/pages/user_edit')->with('user', $user)->with('all_roles', $all_roles);
     }
 
@@ -88,7 +90,18 @@ class user_control extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required'
+        ]);
+
+        $input = $request->all();
+        $role = Role::where('name', $request->role)->first();
+        $user = User::find($id);
+        $user->update($input);
+        $user->roles()->sync($role);
+        return redirect('/user-control')->with('status', 'success');
     }
 
     /**
@@ -99,6 +112,8 @@ class user_control extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::where($id)->first();
+        $user->roles()->delete($id);
+        return redirect('/user-control');
     }
 }

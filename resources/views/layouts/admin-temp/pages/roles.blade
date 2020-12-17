@@ -47,7 +47,9 @@
                                 </td>
                                 <td>
                                     @foreach ($role->permissions as $permission)
-                                        {{ $permission->name }}
+                                        <div class="btn btn-secondary">
+                                            {{ $permission->name }}
+                                        </div>
                                     @endforeach
                                 </td>
                                 <td>

@@ -29,11 +29,13 @@
                                             {{ $role->slug . ' /' }}
                                         @endforeach
                                     @else
-                                        
+
                                     @endif
                                 </td>
                                 <td>
-                                    <a type="button" href={{'user-control/'.$user->id.'/edit'}} class="btn btn-primary">Edit</a>
+                                    <a type="button" href={{ 'user-control/' . $user->id . '/edit' }}
+                                        class="btn btn-primary">Edit</a>
+                                    <a type="button" class="btn btn-primary">Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -51,5 +53,26 @@
         </div>
     </div>
     <!-- End of Main Content -->
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">confirm delete</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current
+                    session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href={{ 'user-control/' . $user->id }} onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

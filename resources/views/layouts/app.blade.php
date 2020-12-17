@@ -26,11 +26,11 @@
         <div id="wrapper">
             <!-- Sidebar -->
             @guest
-                @if (Route::has('login'))
+            @if (Route::has('login'))
 
-                @endif
+            @endif
             @else
-                @include('layouts.admin-temp.inc.sidebar')
+            @include('layouts.admin-temp.inc.sidebar')
             @endguest
             <!-- End of Sidebar -->
 
@@ -47,11 +47,7 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                        @include('layouts.admin-temp.inc.messages')
                         @yield('content')
                     </div>
                     <!-- /.container-fluid -->
