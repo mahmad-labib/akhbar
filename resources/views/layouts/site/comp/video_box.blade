@@ -1,0 +1,8 @@
+<div class="list-Latest-news-title mr-2 mb-3" style="display: block; width: calc(100% + 8px); ">
+    <a href="" class="text-white">{{$title}}</a>
+</div>
+<div class="container">
+    <div class="row">
+        @each('layouts/site/inc/news_video_box', $news, 'news')
+    </div>
+</div>

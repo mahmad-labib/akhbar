@@ -1,0 +1,73 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="card shadow" style="margin-bottom: 15px">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Add Role</h6>
+        </div>
+        <div class="card-body">
+            <form action="roles" method="POST">
+                @csrf
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="slug" class="col-sm-2 col-form-label">slug</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="slug" name="slug">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="card shadow ">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Control Roles</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>role</th>
+                            <th>permissions</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($roles as $role)
+                            <tr>
+                                <td>
+                                    {{ $role->name }}
+                                </td>
+                                <td>
+                                    @foreach ($role->permissions as $permission)
+                                        <div class="btn btn-secondary">
+                                            {{ $permission->name }}
+                                        </div>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a type="button" href={{ 'roles/' . $role->id . '/edit' }}
+                                        class="btn btn-primary">Edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>permissions</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    @endsection

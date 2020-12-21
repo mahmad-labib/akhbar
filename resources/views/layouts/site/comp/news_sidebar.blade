@@ -1,0 +1,6 @@
+<div class="col-md-12  bg-white">
+    <div class="list-Latest-news-title mr-2 mb-3" style="right: -25px;">
+        <a href="" class="text-white">{{ $title }}</a>
+    </div>
+    @each('layouts/site/inc/news_side_card', $news, 'news')
+</div>
