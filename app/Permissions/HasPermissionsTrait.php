@@ -20,15 +20,6 @@ trait HasPermissionsTrait
     $this->permissions()->saveMany($permissions);
     return $this;
   }
-  
-  public function giveSectionTo(...$sections) {
-    $sections = $this->getAllSections($sections);
-    if($sections == null) {
-      return $this;
-    }
-    $this->sections()->saveMany($sections);
-    return $this;
-  }
 
   public function withdrawPermissionsTo(...$permissions)
   {
@@ -96,7 +87,17 @@ trait HasPermissionsTrait
     return Permission::whereIn('slug', $permissions)->get();
   }
 
-  
+  public function giveSectionsTo(...$sections)
+  {
+
+    $sections = $this->getAllSections($sections);
+    dd($sections);
+    if ($sections === null) {
+      return $this;
+    }
+    $this->sections()->saveMany($sections);
+    return $this;
+  }
 
   public function sections()
   {
@@ -107,4 +108,21 @@ trait HasPermissionsTrait
   {
     return Section::whereIn('name', $sections)->get();
   }
+
+
+  public function withdrawSectionsTo(...$sections)
+  {
+
+    $sections = $this->getAllSections($sections);
+    $this->sections()->detach($sections);
+    return $this;
+  }
+
+  public function refreshSections(...$sections)
+  {
+
+    $this->sections()->detach();
+    return $this->giveSectionsTo($sections);
+  }
+
 }

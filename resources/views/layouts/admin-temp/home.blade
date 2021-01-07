@@ -2,15 +2,11 @@
 
 @section('content')
 
-    <!-- Content Row -->
-    <div class="row">
-        
-        @role('admin')
-        <h1>hello admin</h1>
-        @endrole
-
-    </div>
-    <!-- End of Main Content -->
+<!-- Content Row -->
+<div class="row">
+    <h1>hello {{ Auth::user()->name }}</h1>
+</div>
+<!-- End of Main Content -->
 
 
 @endsection

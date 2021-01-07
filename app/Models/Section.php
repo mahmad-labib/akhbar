@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
+    protected $fillable = [
+        'name',
+        'parent_id'
+    ];
     public function children()
     {
         return $this->hasMany('App\Models\Section', 'parent', 'id');

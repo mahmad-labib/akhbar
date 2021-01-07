@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\user_control;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,13 +29,13 @@ Route::get('/news-page', function () {
 
 Auth::routes();
 
+Route::get(
+    '/home',
+    [HomeController::class, 'index']
+)->name('home');
+
 Route::group(['middleware' => 'role:admin'], function () {
-
-    Route::get(
-        '/admin',
-        [HomeController::class, 'index']
-    )->name('admin');
-
     Route::resource('user-control', user_control::class);
     Route::resource('roles', RolesController::class);
+    Route::resource('sections', SectionController::class);
 });

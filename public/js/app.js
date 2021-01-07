@@ -13645,7 +13645,9 @@ module.exports = g;
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./main */ "./resources/js/main.js"); // window.Vue = require('vue');
+__webpack_require__(/*! ./main */ "./resources/js/main.js");
+
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // window.Vue = require('vue');
 // /**
 //  * The following block of code may be used to automatically register your
 //  * Vue components. It will recursively scan this directory for the Vue

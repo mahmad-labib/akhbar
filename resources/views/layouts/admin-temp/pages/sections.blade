@@ -1,0 +1,94 @@
+@extends('layouts.app')
+
+@section('content')
+
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jstree').jstree({
+                "core": {
+                    "multiple" : false,
+                    "themes": {
+                        "variant": "large"
+                    },
+                    'data': {!! $sectionsTree !!}
+                },
+                "checkbox": {
+                    "keep_selected_style": true
+                },
+                "plugins": ["wholerow"]
+            });
+        });
+        $('#jstree')
+            // listen for event
+            .on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+                r.push(data.instance.get_node(data.selected[i]).id);
+                }
+                $('#parent_id').attr('value', r.join(', '));
+            })
+            // create the instance
+            // .jstree();
+    </script>
+@endpush
+
+<div class="card shadow" style="margin-bottom: 15px">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Section</h6>
+    </div>
+    <div class="card-body">
+        <form action="sections" method="POST">
+            @csrf
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">name</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="parent_id">Choose the parent section:</label>
+                <div id="jstree"></div>
+                <input id="parent_id" type="text" name="parent_id" hidden>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="card shadow ">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Control Sections</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>section</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach($sections as $section)
+                        <tr>
+                            <td>
+                                {{ $section->name }}
+                            </td>
+                            <td>
+                                <a type="button" href={{'/sections' . '/' . $section->id . '/edit'}} class="btn btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    @endsection

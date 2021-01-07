@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('./main');
+window.$ = window.jQuery = require('jquery');
 
 
 // window.Vue = require('vue');
